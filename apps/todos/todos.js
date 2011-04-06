@@ -5,10 +5,10 @@
 /*globals Todos */
 
 SC.ready(function() {
-  var todo1 = Todos.Todo.create({ title: 'todo1' });
+  /*var todo1 = Todos.Todo.create({ title: 'todo1' });
   var todo2 = Todos.Todo.create({ title: 'todo2' });
   var todo3 = Todos.Todo.create({ title: 'todo3' });
-  var todos = [todo1, todo2, todo3];
+  var todos = [todo1, todo2, todo3];*/
   
   var todos = Todos.store.find(Todos.QUERY_ALL_TODOS);
   Todos.todoListController.set('content', todos);
