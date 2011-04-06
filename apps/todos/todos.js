@@ -4,6 +4,17 @@
 // ==========================================================================
 /*globals Todos */
 
+SC.ready(function() {
+  var todo1 = Todos.Todo.create({ title: 'todo1' });
+  var todo2 = Todos.Todo.create({ title: 'todo2' });
+  var todo3 = Todos.Todo.create({ title: 'todo3' });
+  var todos = [todo1, todo2, todo3];
+  
+  var todos = Todos.store.find(Todos.QUERY_ALL_TODOS);
+  Todos.todoListController.set('content', todos);
+});
+
+
 Todos.QUERY_ALL_TODOS = SC.Query.local(Todos.Todo);
 
 
@@ -15,6 +26,7 @@ Todos.Todo = SC.Record.extend({
 
 
 Todos.todoListController = SC.ArrayController.create({
+  
   content: [],
 
   createTodo: function(title) {
@@ -22,10 +34,6 @@ Todos.todoListController = SC.ArrayController.create({
     this.pushObject(todo);
   },
   
-  setTodos: function(todos) {
-    this.set('content', todos);
-  },
-
   remaining: function() {
     return this.filterProperty('isDone', false).get('length');
   }.property('@each.isDone'),
@@ -62,14 +70,6 @@ Todos.clearCompletedView = SC.TemplateView.create({
     Todos.todoListController.clearCompletedTodos();
   }
 });
-
-
-/*Todos.testView = SC.TemplateView.create({
-  mouseUp: function() {
-    var todos = Todos.store.find(Todos.QUERY_ALL_TODOS);
-    Todos.todoListController.setTodos(todos);
-  }
-});*/
 
 
 Todos.todoListView = SC.TemplateCollectionView.create({

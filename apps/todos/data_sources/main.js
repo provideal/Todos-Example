@@ -3,7 +3,7 @@ Todos.DataSource = SC.DataSource.extend({
     if (query === Todos.QUERY_ALL_TODOS) {
       SC.Request.getUrl('/todos.json')
         .json()
-        .notify(this, 'fetchDidComplete', store, query)
+        .notify(this, '_fetchDidComplete', store, query)
         .send();
         
       return YES;
@@ -12,16 +12,16 @@ Todos.DataSource = SC.DataSource.extend({
     return NO;
   },
   
-  fetchDidComplete: function(response, store, query) {
+  _fetchDidComplete: function(response, store, query) {
     if(SC.ok(response)) {      
       var recordType = query.get('recordType');
       var records = Todos.TodoJSONProxy.normalize_json(response.get('body'));
-
+      console.log(records);
+      
       store.loadRecords(recordType, records);
       store.dataSourceDidFetchQuery(query);
     } else {
       alert('Error');
-      // Tell the store that your server returned an error
       store.dataSourceDidErrorQuery(query, response);
     }
   },
