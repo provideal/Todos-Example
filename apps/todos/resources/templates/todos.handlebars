@@ -9,7 +9,9 @@
     <button>Clear Completed Todos</button>
   {{/view}}
 
-  {{bind "displayRemaining"}}
+  {{#if remaining }}
+    {{ displayRemaining }} remaining
+  {{/if}}
 {{/view}}
 
 {{#view "Todos.markAllDoneView"}}
@@ -23,6 +25,7 @@
     {{#view "Todos.CheckboxView"}}
       <input type="checkbox" class="check">
     {{/view}}
+
     {{content.title}}
   </label>
 {{/collection}}

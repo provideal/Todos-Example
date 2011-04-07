@@ -1,3 +1,25 @@
+Todos.TaskJSONProxy = SC.Object.create({
+          normalize_task_data: function(data) {
+               result = new Array();
+               if (data.length == undefined)
+               {
+                    array_name = 'data.task';
+                    eval(array_name).guid = eval(array_name).id;
+                    result.push(eval(array_name));
+               }
+               else
+               {
+                    for(var i=0; i<data.length; i++) {
+                         array_name = 'data[i].task';
+                         eval(array_name).guid = eval(array_name).id;
+                         result.push(eval(array_name));
+                    }
+               }
+               return result;
+          } 
+     }) ;
+
+
 Todos.DataSource = SC.DataSource.extend({
   fetch: function(store, query) {
     if (query === Todos.QUERY_ALL_TODOS) {
@@ -13,9 +35,9 @@ Todos.DataSource = SC.DataSource.extend({
   },
   
   _fetchDidComplete: function(response, store, query) {
-    if(SC.ok(response)) {      
+    if(SC.ok(response)) {     
       var recordType = query.get('recordType');
-      var records = Todos.TodoJSONProxy.normalize_json(response.get('body'));
+      var records = response.get('body');
       console.log(records);
       
       store.loadRecords(recordType, records);
