@@ -6,10 +6,7 @@
 
 SC.ready(function() {
   var todos = Todos.store.find(Todos.QUERY_ALL_TODOS);
-  
-  window.setTimeout(function() {
-    Todos.todoListController.set('content', todos);
-  }, 2000);
+  Todos.todoListController.set('content', todos);  
 });
 
 
