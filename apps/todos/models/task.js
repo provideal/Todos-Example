@@ -1,6 +1,6 @@
 Todos.Task = SC.Record.extend({
-  title: null,
-  isDone: false
+  title: SC.Record.attr(String),
+  isDone: SC.Record.attr(Boolean)
 });
 
 

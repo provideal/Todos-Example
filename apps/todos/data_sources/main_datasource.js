@@ -1,6 +1,6 @@
 Todos.DataSource = SC.DataSource.extend({
   fetch: function(store, query) {
-    if (query === Todos.QUERY_ALL_TODOS) {
+    if (query === Todos.QUERY_ALL_TASKS) {
       SC.Request.getUrl('/todos.json')
         .json()
         .notify(this, '_fetchDidComplete', store, query)
